@@ -2,7 +2,7 @@ import bs4
 import random
 import requests
 
-GROUP_SIZE = 3
+GROUP_SIZE = 5
 URL = 'https://www.novacare.no/menneskene'
 
 response = requests.get(URL)
@@ -13,5 +13,5 @@ random.shuffle(employees)
 
 for i, employee in enumerate(employees):
     if i % GROUP_SIZE == 0:
-        print(f'\nGruppe {int(i/3+1)}:')
+        print(f'\nGruppe {int(i/GROUP_SIZE+1)}:')
     print(f'- {employee}')
