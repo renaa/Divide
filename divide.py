@@ -4,13 +4,13 @@ import requests
 import sys
 
 if len(sys.argv) != 2:
-    print('Usage: python ' + sys.argv[0] + ' <group_size>')
+    print('Usage: python ' + sys.argv[0] + ' <minimum_group_size>')
     sys.exit(1)
 
 try:
-    group_size = int(sys.argv[1])
+    minimum_group_size = int(sys.argv[1])
 except ValueError:
-    print("Error: group_size must be an integer.")
+    print("Error: minimum_group_size must be an integer.")
     sys.exit(1)
 
 URL = 'https://www.novacare.no/menneskene'
@@ -21,7 +21,26 @@ employee_tags = soup.find_all('h2', class_='employees__name')
 employees = [tag.text for tag in employee_tags]    
 random.shuffle(employees)
 
-for i, employee in enumerate(employees):
-    if i % group_size == 0:
-        print(f'\nGruppe {int(i/group_size+1)}:')
-    print(f'- {employee}')
+employee_count = len(employees)
+group_count = employee_count // minimum_group_size
+extra_persons = employee_count % minimum_group_size
+group_sizes = [minimum_group_size] * group_count
+
+# Distribute extra persons
+for index in range(extra_persons):
+    group_sizes[index % len(group_sizes)] += 1
+
+start_index = 0
+
+# Print groups
+for i, size in enumerate(group_sizes):    
+    print(f'\nGruppe {i+1} ({size} personer):')
+
+    end_index = start_index + size
+    current_group = employees[start_index:end_index]
+
+    for person in current_group:
+        print(f"- {person}")
+       
+    start_index = end_index
+    print()
