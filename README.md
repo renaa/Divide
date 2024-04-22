@@ -1,5 +1,5 @@
-# Partion Novacare!
+# Divide Novacare!
 
 Divide Novacare into groups of size n
 
-Usage: python meet.py n
+Usage: python divide.py n
