@@ -34,10 +34,17 @@ start_index = 0
 
 # Print groups
 for i, size in enumerate(group_sizes):    
-    print(f'\nGruppe {i+1} ({size} personer):')
-
+    
     end_index = start_index + size
     current_group = employees[start_index:end_index]
+
+    # check if current group contains 'Espen Holmedal' if so set multiplier to 2:
+    if 'Espen Holmedal' in current_group:
+        multiplier = 2
+    else:
+        multiplier = 1
+    
+    print ( f'\nGruppe {i+1} ({size} personer) (multiplier: x{multiplier}):')
 
     for person in current_group:
         print(f"- {person}")
