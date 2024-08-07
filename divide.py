@@ -4,14 +4,14 @@ import requests
 import sys
 
 if len(sys.argv) != 2:
-    print('Usage: python ' + sys.argv[0] + ' <minimum_group_size>')
-    sys.exit(1)
+    minimum_group_size = 3
 
-try:
-    minimum_group_size = int(sys.argv[1])
-except ValueError:
-    print("Error: minimum_group_size must be an integer.")
-    sys.exit(1)
+else:
+    try:
+        minimum_group_size = int(sys.argv[1])
+    except ValueError:
+        print("Error: minimum_group_size must be an integer.")
+        sys.exit(1)
 
 URL = 'https://www.novacare.no/menneskene'
 
